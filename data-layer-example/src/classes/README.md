@@ -1,6 +1,6 @@
 # data-layer-example
 
-This pattern allows for Dependency Inversion on the Data Layer with Salesforce Apex. This is consistent with SOLID design principles and N-Tier Architecture. By following this pattern, we can achieve more maintainable, testable code basesin Salesforce.
+This pattern allows for Dependency Inversion on the Data Layer with Salesforce Apex. This is consistent with SOLID design principles and N-Tier Architecture. By following this pattern, we can achieve more maintainable, testable code bases in Salesforce.
 
 Like Triggers, each SObject that we work with requires a Data Access Module. That Apex Module begins with the <Object Name> Data Accessor Interface or DAI. The Example here uses Account, see AccountDAI.
 
