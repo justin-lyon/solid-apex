@@ -1,5 +1,29 @@
 # data-layer-example
 
+# Usage
+
+```java
+public class MyBusinessLayer {
+  private AccountDAI accessor;
+
+  // Constructor Injection allows for Dependency Inversion.
+  public MyBusinessLayer(AccountDAI accessor) {
+    this.accessor = accessor;
+  }
+
+  public void searchRecords(searchString) {
+    // SOQL/SOSL Defined on the Object Specific Data Accessor Interface (DAI)
+    List<Account> foundAccounts = accessor.searchAccounts(searchString);
+  }
+
+  public void createRecords() {
+    // DML methods merged to AccountDAI from the DmlBase.
+    accessor.insertRecords(new List<Account>{ new Account(Name = 'Sample') });
+  }
+}
+```
+
+# Design
 ---
 ## DmlInterface.cls
 
