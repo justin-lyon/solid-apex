@@ -98,7 +98,7 @@ Extends DmlBase
 
 Implements AccountDAI
 
-My implementing AccountDAI the AccountDA is under contract to implement all methods defined in both the DmlInterface and the AccountDAI. By extending DmlBase, the AccountDA has defined the implementation for the DmlInterface - therefore only needs to define the implementation for the queries in AccountDAI.
+By implementing AccountDAI the AccountDA is under contract to implement all methods defined in both the DmlInterface and the AccountDAI. By extending DmlBase, the AccountDA has defined the implementation for the DmlInterface - therefore only needs to define the implementation for the queries in AccountDAI.
 
 ```java
 public inherited sharing class AccountDA extends DmlBase implements AccountDAI {
