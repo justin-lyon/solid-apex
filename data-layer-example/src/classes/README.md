@@ -6,16 +6,40 @@
 Provides interface for DML Operations
 
 ```java
-void insertRecords(List<SObject> newRecords);
-void updateRecords(List<SObject> records);
-void upsertRecords(List<SObject> records);
-void deleteRecords(List<SObject> records);
+public interface DmlInterface {
+	void insertRecords(List<SObject> newRecords);
+	void updateRecords(List<SObject> records);
+	void upsertRecords(List<SObject> records);
+	void deleteRecords(List<SObject> records);
+}
 ```
 
 ---
 ## DmlBase.cls
 
 Implements DmlInterface
+
+```java
+public abstract class DmlBase implements DmlInterface {
+
+	public void insertRecords(List<SObject> newRecords) {
+		insert newRecords;
+	}
+
+	public void updateRecords(List<SObject> records) {
+		update records;
+	}
+
+	public void upsertRecords(List<SObject> records) {
+		upsert records;
+	}
+
+	public void deleteRecords(List<SObject> records) {
+		delete records;
+	}
+}
+
+```
 
 ---
 ## AccountDAI.cls
@@ -37,3 +61,31 @@ public interface AccountDAI extends DmlInterface {
 Extends DmlBase
 
 Implements AccountDAI
+
+```java
+public inherited sharing class AccountDA extends DmlBase implements AccountDAI {
+	public static final Integer MAX_RESULTS = 5;
+
+	public List<Account> queryLimittedAccounts(Integer limitter) {
+		limitter = Integer.valueOf(limitter);
+		return [
+			SELECT Id,
+				Name
+			FROM Account
+			ORDER BY CreatedDate ASC
+			LIMIT :limitter];
+	}
+
+	public List<Account> searchAccounts(String searchString) {
+		String escapedTerm = String.escapeSingleQuotes(searchString) + '*';
+
+		List<List<SObject>> results = [
+			FIND :escapedTerm IN ALL FIELDS
+			RETURNING
+				Account (Id, Name)
+			LIMIT :MAX_RESULTS];
+
+		return results[0];
+	}
+}
+```
