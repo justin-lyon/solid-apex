@@ -28,7 +28,7 @@ public class MyBusinessLayer {
 ---
 ## DmlInterface.cls
 
-Provides interface for DML Operations
+Provides interface for DML Operations. All DML Operations are generic and available to most SObjects. This Interface will be implemented by a Base Class that our classes extend.
 
 ```java
 public interface DmlInterface {
@@ -43,6 +43,8 @@ public interface DmlInterface {
 ## DmlBase.cls
 
 Implements DmlInterface
+
+Implement the SObject Generic DML Methods. These are extended onto our sObject specific Data Accessors.
 
 ```java
 public abstract class DmlBase implements DmlInterface {
@@ -73,6 +75,9 @@ Extends DmlInterface
 
 Provides interface for Account queries.
 
+By extending the DmlInterface, any Implementation must include the methods from DmlInterface.
+The AccountDAI Interface adds Account specific queries to the interface contract.
+
 ```java
 public interface AccountDAI extends DmlInterface {
 	List<Account> queryLimittedAccounts(Integer limitter);
@@ -86,6 +91,8 @@ public interface AccountDAI extends DmlInterface {
 Extends DmlBase
 
 Implements AccountDAI
+
+My implementing AccountDAI the AccountDA is under contract to implement all methods defined in both the DmlInterface and the AccountDAI. By extending DmlBase, the AccountDA has defined the implementation for the DmlInterface - therefore only needs to define the implementation for the queries in AccountDAI.
 
 ```java
 public inherited sharing class AccountDA extends DmlBase implements AccountDAI {
