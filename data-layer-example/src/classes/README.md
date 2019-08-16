@@ -11,9 +11,10 @@ public class MyBusinessLayer {
     this.accessor = accessor;
   }
 
-  public void searchRecords(searchString) {
+  public List<Account> searchRecords(searchString) {
     // SOQL/SOSL Defined on the Object Specific Data Accessor Interface (DAI)
     List<Account> foundAccounts = accessor.searchAccounts(searchString);
+    return foundAccounts;
   }
 
   public void createRecords() {
