@@ -1,4 +1,10 @@
 /**
+ * Putting the D in SOLID.
+ * Dependency Inversion Principle
+ * No class should be directly dependent upon another except through an interface.
+ * Here an AccountDAI Interface describes two methods.
+ * AccountDA and AccountDAMock implement two different approaches to these methdos.
+ * AccountDA uses the Salesforce Database, AccountDAMock does not.
  */
 public with sharing class DIP {
 
